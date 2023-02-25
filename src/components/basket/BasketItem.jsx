@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { Button } from "../UI/Button";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
 
 export const BasketItem = ({ title, price, amount,decrementAmount,incrementAmount }) => {
   return (
@@ -13,10 +15,10 @@ export const BasketItem = ({ title, price, amount,decrementAmount,incrementAmoun
         </PriceAndAmount>
         <CounterContainer>
           <Button borderStyle="squared" variant="outlined" onClick={decrementAmount}>
-            -
+            <RemoveIcon/>
           </Button>
           <Button borderStyle="squared" variant="outlined" onClick={incrementAmount}>
-            +
+            <AddIcon/>
           </Button>
         </CounterContainer>
       </Content>
