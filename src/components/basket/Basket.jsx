@@ -1,17 +1,16 @@
-import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
+import styledComponent from "styled-components";
 import {
   deleteBasketItem,
   submitOrder,
   updeteBasketItem,
 } from "../../store/basket/basketReducer";
 import { uiActions } from "../../store/UI/UISlice";
-import {Modal as MuiModal} from "@mui/material"
-import Snackbar from "../UI/Snackbar";
-import {Box} from "@mui/material"
+import {Modal} from "@mui/material"
+// import Snackbar from "../UI/Snackbar";
 import { BasketItem } from "./BasketItem";
 import { TotalAmount } from "./TotalAmount";
+import { styled } from "@mui/system";
 
 export const Basket = ({ onClose ,open}) => {
   const dispatch = useDispatch();
@@ -56,7 +55,7 @@ export const Basket = ({ onClose ,open}) => {
 
   return (
     <>
-      <MuiModal onClose={onClose} open={open}>
+      <Modal onClose={onClose} open={open}>
         <Container>
           <Content>
             {items.length ? (
@@ -84,42 +83,43 @@ export const Basket = ({ onClose ,open}) => {
             />
           </Content>
         </Container>
-      </MuiModal>
+      </Modal>
     </>
   );
 };
-console.log(Snackbar);
-const Content = styled.div`
+
+const Content = styledComponent.div`
   padding: 1rem 1.5rem;
   width: 100%;
   height: 100%;
+  
 `;
-const FlexContainer = styled.div`
+const FlexContainer = styledComponent.div`
   height: 228px;
   overflow-y: scroll;
 `;
-const Container = styled(Box)`
-  position: fixed;
-   top: 20vh;
-    left: 5%;
-     width: 90%;
-     background-color: white;
-     padding: 1rem;
-     border-radius: 14px;
-     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-     z-index: 30;
-     animation: slide-down 300ms ease-out forwards;
-     width: 40rem;
-     left: calc(50% - 20rem);
+const Container = styled('div') (({theme})=>({
+  position: "fixed",
+   top: "20vh",
+    left: "5%",
+     width: "90%",
+     backgroundColor:theme.palette.secondary.light,
+     padding: "1rem",
+     borderRadius: "14px",
+     boxShadow: "0 2px 8px rgba(0, 0, 0, 0.25)",
+     zIndex: "30",
+     animation: "slide-down 300ms ease-out forwards",
+     width: "40rem",
+     left: "calc(50% - 20rem)",
 
-    @keyframes slide-down {
-     from {
-    opacity: 0;
-    transform: translateY(-3rem);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+    "@keyframes slide-down": {
+    " from": {
+    opacity: "0",
+    transform: "translateY(-3rem)",
+  },
+ "to": {
+    opacity: "1",
+    transform: "translateY(0)",
   }
 } 
-`;
+}))

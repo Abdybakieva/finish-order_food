@@ -1,8 +1,9 @@
 import React from "react";
-import styled from "styled-components";
+import styledComponents from "styled-components";
 import { Button } from "../UI/Button";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+import { styled } from "@mui/system";
 
 export const BasketItem = ({ title, price, amount,decrementAmount,incrementAmount }) => {
   return (
@@ -26,44 +27,44 @@ export const BasketItem = ({ title, price, amount,decrementAmount,incrementAmoun
   );
 };
 
-const Container = styled.div`
+const Container = styledComponents.div`
   padding: 24px 0;
   width: 100%;
 `;
 
-const Title = styled.p`
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 30px;
-  margin: 0 0 12px 0;
-  color: #222222;
-`;
+const Title = styled("p")(({ theme }) => ({
+  fontWeight: "600",
+  fontSize: "20px",
+  lineHeight: "30px",
+  margin: "0 0 12px 0",
+  color: theme.palette.primary.constrastText,
+}));
 
-const Price = styled.p`
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 27px;
-  color: #ad5502;
-  margin: 0;
-`;
-const Amout = styled.span`
-  border: 1px solid #d6d6d6;
-  border-radius: 6px;
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 24px;
-  padding: 6px 14px;
-  color: #222222;
-  display: block;
-`;
-const PriceAndAmount = styled.div`
+const Price = styled("p")(({ theme }) => ({
+  fontWeight: "600",
+  fontSize: "18px",
+  lineHeight: "27px",
+  color: theme.palette.primary.constrastText,
+  margin: "0",
+}));
+const Amout = styled("span")(({theme})=>({
+border: "1px solid #d6d6d6",
+  borderRadius: "6px",
+  fontSize: "16px",
+  fontWeight: "600",
+  lineHeight: "24px",
+  padding: "6px 14px",
+  color: theme.palette.primary.constrastText,
+  display: "block",
+}))
+const PriceAndAmount = styledComponents.div`
   display: flex;
   align-items: center;
   width: 153px;
   justify-content: space-between;
 `;
 
-const CounterContainer = styled.div`
+const CounterContainer = styledComponents.div`
   /* &:first-child {
     margin-right: 14px;
   } */
@@ -71,7 +72,7 @@ const CounterContainer = styled.div`
   gap: 14px;
 `;
 
-const Content = styled.div`
+const Content = styledComponents.div`
   display: flex;
   justify-content: space-between;
   align-items: center;

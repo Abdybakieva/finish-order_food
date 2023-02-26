@@ -1,5 +1,6 @@
+import { styled } from "@mui/system";
 import React from "react";
-import styled from "styled-components";
+import styledComponent from "styled-components";
 
 function SummaryInfoCard() {
   return (
@@ -19,22 +20,22 @@ function SummaryInfoCard() {
 
 export default SummaryInfoCard;
 
-const Card = styled.div`
-  max-width: 53.375rem;
-  background: #383838;
-  padding: 36px 54px;
-  box-shadow: 0px 6px 16px rgb(0, 0, 0, 0.3);
-  border-radius: 16px;
-  position: relative;
-  margin: -12rem auto;
-  color: #ffffff;
-  text-align: center;
-  font-weight: 500;
-  font-size: 1rem;
-  line-height: 24px;
-`;
+const Card = styled("div")(({ theme }) => ({
+  maxWidth: "53.375rem",
+  background: theme.palette.primary.main,
+  padding: "36px 54px",
+  boxShadow: "0px 6px 16px rgb(0, 0, 0, 0.3)",
+  borderRadius: "16px",
+  position: "relative",
+  margin: "-12rem auto",
+  color: "#ffffff",
+  textAlign: "center",
+  fontWeight: "500",
+  fontSize: "1rem:-khtml-any-link",
+  lineHeight: "24px",
+}));
 
-const StyleTitle = styled.h1`
+const StyleTitle = styledComponent.h1`
   font-weight: 600;
   font-size: 36px;
   line-height: 54px;
