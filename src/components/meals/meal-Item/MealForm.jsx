@@ -1,30 +1,30 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import { Button } from "../../UI/Button";
-import { addtoBasket } from "../../../store/basket/basketReducer";
-import { useDispatch } from "react-redux";
-import AddIcon from "@mui/icons-material/Add";
-import {TextField} from "@mui/material"
+import React, { useState } from 'react'
+import styled from 'styled-components'
+import { useDispatch } from 'react-redux'
+import AddIcon from '@mui/icons-material/Add'
+import { TextField } from '@mui/material'
 
+import { Button } from '../../UI/Button'
+import { addtoBasket } from '../../../store/basket/basket.thunk'
 
 function MealForm({ id, title, price }) {
-const dispatch=useDispatch()
-  const [amount, setAmount] = useState(1);
+  const dispatch = useDispatch()
+  const [amount, setAmount] = useState(1)
 
   const amoutChangeHandler = (event) => {
-    setAmount(event.target.value);
-  };
+    setAmount(event.target.value)
+  }
 
   const submitHandler = (event) => {
-    event.preventDefault();
+    event.preventDefault()
     const basketItem = {
       id,
       price,
       title,
       amount,
-    };
-    dispatch(addtoBasket(basketItem));
-  };
+    }
+    dispatch(addtoBasket(basketItem))
+  }
 
   return (
     <StyledForm>
@@ -49,28 +49,26 @@ const dispatch=useDispatch()
         Add
       </Button>
     </StyledForm>
-  );
+  )
 }
 
-export default MealForm;
+export default MealForm
 
-const StyledText = styled(TextField)(()=>({
-  marginRight: "10px",    
+const StyledText = styled(TextField)(() => ({
+  marginRight: '10px',
 }))
 
-const Container = styled("div")(()=>({
-  marginBottom: "12px"
-
+const Container = styled('div')(() => ({
+  marginBottom: '12px',
 }))
-   const StyledLabel=styled("label")(()=>({
-    fontWeight: "600",
-    fontSize: "18px",
-    lineHeight: "27px",
-    color: "#222222",
-   }))
-const StyledForm = styled("form")(()=>({
-  display: "flex",
-  alignItems:" flex-end",
-  flexDirection: "column",
+const StyledLabel = styled('label')(() => ({
+  fontWeight: '600',
+  fontSize: '18px',
+  lineHeight: '27px',
+  color: '#222222',
 }))
-
+const StyledForm = styled('form')(() => ({
+  display: 'flex',
+  alignItems: ' flex-end',
+  flexDirection: 'column',
+}))

@@ -1,11 +1,17 @@
-import React from "react";
-import styledComponents from "styled-components";
-import { Button } from "../UI/Button";
-import AddIcon from "@mui/icons-material/Add";
-import RemoveIcon from "@mui/icons-material/Remove";
-import { styled } from "@mui/system";
+import React from 'react'
+import styledComponents from 'styled-components'
+import AddIcon from '@mui/icons-material/Add'
+import RemoveIcon from '@mui/icons-material/Remove'
+import { styled } from '@mui/system'
+import { Button } from '../UI/Button'
 
-export const BasketItem = ({ title, price, amount,decrementAmount,incrementAmount }) => {
+export const BasketItem = ({
+  title,
+  price,
+  amount,
+  decrementAmount,
+  incrementAmount,
+}) => {
   return (
     <Container>
       <Title>{title}</Title>
@@ -15,54 +21,62 @@ export const BasketItem = ({ title, price, amount,decrementAmount,incrementAmoun
           <Amout>{amount}</Amout>
         </PriceAndAmount>
         <CounterContainer>
-          <Button borderStyle="squared" variant="outlined" onClick={decrementAmount}>
-            <RemoveIcon/>
+          <Button
+            borderStyle="squared"
+            variant="outlined"
+            onClick={decrementAmount}
+          >
+            <RemoveIcon />
           </Button>
-          <Button borderStyle="squared" variant="outlined" onClick={incrementAmount}>
-            <AddIcon/>
+          <Button
+            borderStyle="squared"
+            variant="outlined"
+            onClick={incrementAmount}
+          >
+            <AddIcon />
           </Button>
         </CounterContainer>
       </Content>
     </Container>
-  );
-};
+  )
+}
 
 const Container = styledComponents.div`
   padding: 24px 0;
   width: 100%;
-`;
+`
 
-const Title = styled("p")(({ theme }) => ({
-  fontWeight: "600",
-  fontSize: "20px",
-  lineHeight: "30px",
-  margin: "0 0 12px 0",
+const Title = styled('p')(({ theme }) => ({
+  fontWeight: '600',
+  fontSize: '20px',
+  lineHeight: '30px',
+  margin: '0 0 12px 0',
   color: theme.palette.primary.constrastText,
-}));
+}))
 
-const Price = styled("p")(({ theme }) => ({
-  fontWeight: "600",
-  fontSize: "18px",
-  lineHeight: "27px",
+const Price = styled('p')(({ theme }) => ({
+  fontWeight: '600',
+  fontSize: '18px',
+  lineHeight: '27px',
   color: theme.palette.primary.constrastText,
-  margin: "0",
-}));
-const Amout = styled("span")(({theme})=>({
-border: "1px solid #d6d6d6",
-  borderRadius: "6px",
-  fontSize: "16px",
-  fontWeight: "600",
-  lineHeight: "24px",
-  padding: "6px 14px",
+  margin: '0',
+}))
+const Amout = styled('span')(({ theme }) => ({
+  border: '1px solid #d6d6d6',
+  borderRadius: '6px',
+  fontSize: '16px',
+  fontWeight: '600',
+  lineHeight: '24px',
+  padding: '6px 14px',
   color: theme.palette.primary.constrastText,
-  display: "block",
+  display: 'block',
 }))
 const PriceAndAmount = styledComponents.div`
   display: flex;
   align-items: center;
   width: 153px;
   justify-content: space-between;
-`;
+`
 
 const CounterContainer = styledComponents.div`
   /* &:first-child {
@@ -70,10 +84,10 @@ const CounterContainer = styledComponents.div`
   } */
   display: flex;
   gap: 14px;
-`;
+`
 
 const Content = styledComponents.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-`;
+`

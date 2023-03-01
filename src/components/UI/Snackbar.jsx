@@ -1,5 +1,5 @@
-import React from "react";
-import { Alert, Snackbar as MuiSnackbar } from "@mui/material";
+import React from 'react'
+import { Alert, Snackbar as MuiSnackbar } from '@mui/material'
 
 function Snackbar({ isOpen, onClose, message, severity, autoHideDuration }) {
   return (
@@ -7,13 +7,13 @@ function Snackbar({ isOpen, onClose, message, severity, autoHideDuration }) {
       open={isOpen}
       autoHideDuration={autoHideDuration || 4000}
       onClose={onClose}
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
     >
-      <Alert onClose={onClose} severity={severity} sx={{ width: "100%" }}>
+      <Alert onClose={onClose} severity={severity} sx={{ width: '100%' }}>
         {message}
       </Alert>
     </MuiSnackbar>
-  );
+  )
 }
 
-export default Snackbar;
+export default Snackbar

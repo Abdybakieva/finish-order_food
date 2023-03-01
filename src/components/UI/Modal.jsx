@@ -4,7 +4,7 @@
 
 // const Backdrop = ({ onClose }) => {
 //   return <StyledBackdrop  onClick={onClose}/>;
-  
+
 // };
 
 // const ModalContent = ({ children }) => {
