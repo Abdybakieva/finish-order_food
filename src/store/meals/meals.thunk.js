@@ -1,14 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-// import { mealsSlice } from '.'
-import { fetchApi } from '../../lib/fetchAPI'
+import { getMealRequest } from '../../api/mealService'
 
 const getMeals = createAsyncThunk(
   'meals/getMeals',
-  async (payload, { rejectWithValue }) => {
+  async (_, { rejectWithValue }) => {
     try {
-      const { data } = await fetchApi('foods')
-      //   mealsSlice.getMeals()
-      return data
+      const { data } = await getMealRequest()
+      return data.data
     } catch (error) {
       return rejectWithValue(error)
     }
