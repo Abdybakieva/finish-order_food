@@ -2,6 +2,7 @@ import { AppBar, Button } from '@mui/material'
 import { styled } from '@mui/system'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import styledComponents from 'styled-components'
 import { getBasket } from '../../store/basket/basket.thunk'
 
@@ -9,9 +10,11 @@ import { uiActions } from '../../store/UI/ui.slice'
 import { BasketButton } from './BasketButton'
 
 export const Header = ({ onShowBasket }) => {
+  const isAuthorized = useSelector((state) => state.auth.isAuthorized)
   const items = useSelector((state) => state.basket.items)
   const themeMode = useSelector((state) => state.ui.themeMode)
   const [animationClass, setAnimationClass] = useState('')
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getBasket())
@@ -40,6 +43,10 @@ export const Header = ({ onShowBasket }) => {
     }
   }, [items])
 
+  const signOutHandler = () => {
+    navigate('/signin')
+  }
+
   return (
     <Container>
       <Logo>ReactMeals</Logo>
@@ -48,14 +55,17 @@ export const Header = ({ onShowBasket }) => {
         className={animationClass}
         count={calculateTotalAmount()}
       />
-      <Button
-        onClick={themeHandler}
-        // className={animationClass}
-        // count={calculateTotalAmount()}
-        sx={{ color: 'white' }}
-      >
+      <Button onClick={themeHandler} sx={{ color: 'white' }}>
         {themeMode === 'light' ? 'turn light mode' : 'turn dark mode'}
       </Button>
+
+      {isAuthorized ? (
+        <Button onClick={signOutHandler}>Sign Out</Button>
+      ) : (
+        <Button style={{ color: '#fff' }} onClick={() => navigate('/signin')}>
+          Sign In
+        </Button>
+      )}
     </Container>
   )
 }

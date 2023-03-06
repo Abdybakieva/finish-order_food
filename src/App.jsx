@@ -1,13 +1,9 @@
 import { createTheme, ThemeProvider } from '@mui/material'
-import { useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import { Provider, useDispatch, useSelector } from 'react-redux'
-import styled from 'styled-components'
-import { Basket } from './components/basket/Basket'
-import { Header } from './components/header/Header'
-import { Meals } from './components/meals/Meals'
-import { Summary } from './components/summary/Summary'
 import Snackbar from './components/UI/Snackbar'
 import { darkTheme, lightTheme } from './lib/constans/theme'
+import AppRoutes from './routes/Routes'
 import { store } from './store'
 import { uiActions } from './store/UI/ui.slice'
 
@@ -16,11 +12,7 @@ function AppContent() {
 
   const snackbar = useSelector((state) => state.ui.snackbar)
   const themeMode = useSelector((state) => state.ui.themeMode)
-  const [isBasketVisible, setBasketVisible] = useState(false)
 
-  const showBasketHandler = () => {
-    setBasketVisible((prevState) => !prevState)
-  }
   const theme = useMemo(() => {
     const currrentTheme =
       themeMode === 'light' ? { ...lightTheme } : { ...darkTheme }
@@ -29,20 +21,13 @@ function AppContent() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Header onShowBasket={showBasketHandler} />
-      <Content>
-        <Summary />
-        <Meals />
-        {isBasketVisible && (
-          <Basket open={isBasketVisible} onClose={showBasketHandler} />
-        )}
-        <Snackbar
-          isOpen={snackbar.isOpen}
-          severity={snackbar.severity}
-          message={snackbar.message}
-          onClose={() => dispatch(uiActions.closeSnackbar())}
-        />
-      </Content>
+      <Snackbar
+        isOpen={snackbar.isOpen}
+        severity={snackbar.severity}
+        message={snackbar.message}
+        onClose={() => dispatch(uiActions.closeSnackbar())}
+      />
+      <AppRoutes />
     </ThemeProvider>
   )
 }
@@ -56,10 +41,6 @@ const App = () => {
 }
 
 export default App
-
-const Content = styled.div`
-  margin-top: 101px;
-`
 
 // GET /foods
 // Headers: { UserID: "your_name"  }
