@@ -20,7 +20,7 @@ export const sighup = createAsyncThunk(
 
 export const sigin = createAsyncThunk(
   'auth/sigin',
-  async (payload, { rejectWidthValue }) => {
+  async (payload, { rejectWithValue }) => {
     try {
       const { data } = await authService.signIn(payload)
       const userData = data.data
@@ -28,7 +28,11 @@ export const sigin = createAsyncThunk(
       localStorage.setItem(STORAGE_KEYS.AUTH, JSON.stringify(userData))
       return userData
     } catch (error) {
-      return rejectWidthValue(error)
+      return rejectWithValue(error)
     }
   }
 )
+
+export const sigOut = createAsyncThunk('auth/sigOut', async () => {
+  return localStorage.removeItem(STORAGE_KEYS.AUTH)
+})

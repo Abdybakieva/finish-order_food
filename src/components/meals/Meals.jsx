@@ -1,7 +1,7 @@
 import { styled } from '@mui/system'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import getMeals from '../../store/meals/meals.thunk'
+import { getMeals } from '../../store/meals/meals.thunk'
 import MealItem from './meal-Item/MealItem'
 
 // const DUMMY_MEALS = [
@@ -32,18 +32,19 @@ import MealItem from './meal-Item/MealItem'
 // ];
 
 export const Meals = () => {
-  const { maels, error, isLoading } = useSelector((state) => state.meals)
+  const { meals, error, isLoading } = useSelector((state) => state.meals)
 
   const dispatch = useDispatch()
+
   useEffect(() => {
     dispatch(getMeals())
-  }, [dispatch])
+  }, [])
 
   return (
     <Card>
       {isLoading && !error && <p>loading......</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}
-      {maels.map((meal) => {
+      {meals.map((meal) => {
         return <MealItem meal={meal} key={meal.id} />
       })}
     </Card>

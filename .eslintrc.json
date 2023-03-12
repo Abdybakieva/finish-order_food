@@ -10,13 +10,13 @@
   ],
 
   "overrides": [
-     {
-       // feel free to replace with your preferred file pattern - eg. "src/**/*.slice.js"
-       "files": ["src/**/*.slice.js"],
-       // avoid state param assigment
-       "rules": { "no-param-reassign": ["error", { "props": false }] }
-     }
-],
+    {
+      // feel free to replace with your preferred file pattern - eg. "src/**/*.slice.js"
+      "files": ["src/**/*.slice.js"],
+      // avoid state param assigment
+      "rules": { "no-param-reassign": ["error", { "props": false }] }
+    }
+  ],
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module"
@@ -27,7 +27,8 @@
     "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",
     "react/jsx-props-no-spreading": "off",
-    "import/prefer-default-export":"off",
-    "import/no-extraneous-dependencies":"off"
+    "import/prefer-default-export": "off",
+    "import/no-extraneous-dependencies": "off",
+    "import/no-cycle": "off"
   }
 }

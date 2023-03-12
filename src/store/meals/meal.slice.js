@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 // eslint-disable-next-line import/no-cycle
-import getMeals from './meals.thunk'
+import { getMeals, getMealsPage } from './meals.thunk'
 
 export const mealsactionsTypes = {
   GET_MEALS_SUCCESS: 'GET_MEALS_SUCCESS',
@@ -8,7 +8,8 @@ export const mealsactionsTypes = {
   GET_MEALS_FAILED: 'GET_MEALS_FAILED',
 }
 const initialState = {
-  maels: [],
+  meals: [],
+  meal: {},
   isLoading: false,
 }
 
@@ -17,7 +18,7 @@ export const mealsSlice = createSlice({
   initialState,
   extraReducers: (builder) => {
     builder.addCase(getMeals.fulfilled, (state, action) => {
-      state.maels = action.payload
+      state.meals = action.payload
       state.isLoading = false
       state.error = ''
     })
@@ -29,6 +30,10 @@ export const mealsSlice = createSlice({
     builder.addCase(getMeals.rejected, (state, action) => {
       state.isLoading = false
       state.error = action.payload
+    })
+    builder.addCase(getMealsPage.fulfilled, (state, action) => {
+      state.meal = action.payload
+      state.isLoading = false
     })
   },
 })

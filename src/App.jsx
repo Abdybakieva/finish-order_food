@@ -4,7 +4,7 @@ import { Provider, useDispatch, useSelector } from 'react-redux'
 import Snackbar from './components/UI/Snackbar'
 import { darkTheme, lightTheme } from './lib/constans/theme'
 import AppRoutes from './routes/Routes'
-import { store } from './store'
+import store from './store/store'
 import { uiActions } from './store/UI/ui.slice'
 
 function AppContent() {

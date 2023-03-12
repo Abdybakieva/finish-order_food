@@ -4,7 +4,7 @@ import { basketSlice } from './basket/basket.slice'
 import { mealsSlice } from './meals/meal.slice'
 import { uiSlice } from './UI/ui.slice'
 
-export const store = configureStore({
+const store = configureStore({
   reducer: {
     [mealsSlice.name]: mealsSlice.reducer,
     [basketSlice.name]: basketSlice.reducer,
@@ -12,3 +12,4 @@ export const store = configureStore({
     [authSlice.name]: authSlice.reducer,
   },
 })
+export default store

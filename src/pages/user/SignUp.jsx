@@ -1,11 +1,12 @@
 import { Button, Grid, TextField } from '@mui/material'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { UserRoles } from '../lib/constans/common'
-import { sighup } from '../store/auth/auth.thunk'
+import { Link, useNavigate } from 'react-router-dom'
+import { UserRoles } from '../../lib/constans/common'
+import { sighup } from '../../store/auth/auth.thunk'
 
 export const SignUpPage = () => {
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -32,7 +33,10 @@ export const SignUpPage = () => {
       name,
       role: UserRoles.ADMIN,
     }
+
     dispatch(sighup(data))
+      .unwrap()
+      .then(() => navigate('/'))
   }
   return (
     <Grid sx={{ display: 'flex', flexDirection: 'column', marginTop: '20' }}>

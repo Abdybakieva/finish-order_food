@@ -2,8 +2,9 @@ import { AppBar, Button } from '@mui/material'
 import { styled } from '@mui/system'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import styledComponents from 'styled-components'
+import { sigOut } from '../../store/auth/auth.thunk'
 import { getBasket } from '../../store/basket/basket.thunk'
 
 import { uiActions } from '../../store/UI/ui.slice'
@@ -18,7 +19,7 @@ export const Header = ({ onShowBasket }) => {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getBasket())
-  }, [dispatch])
+  }, [])
 
   const calculateTotalAmount = () => {
     const sum = items.reduce((s, item) => {
@@ -29,6 +30,10 @@ export const Header = ({ onShowBasket }) => {
   const themeHandler = () => {
     const theme = themeMode === 'light' ? 'dark' : 'light'
     dispatch(uiActions.changeTheme(theme))
+  }
+  const signOutHandler = () => {
+    dispatch(sigOut())
+    // navigate('/signin')
   }
 
   useEffect(() => {
@@ -41,15 +46,14 @@ export const Header = ({ onShowBasket }) => {
     return () => {
       clearTimeout(id)
     }
-  }, [items])
-
-  const signOutHandler = () => {
-    navigate('/signin')
-  }
+  }, [])
 
   return (
     <Container>
-      <Logo>ReactMeals</Logo>
+      <Link to="/">
+        <Logo>ReactMeals</Logo>
+      </Link>
+
       <BasketButton
         onClick={onShowBasket}
         className={animationClass}
