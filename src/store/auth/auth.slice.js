@@ -47,7 +47,7 @@ const authSlice = createSlice({
       state.user = {
         name: payload.user.name,
         email: payload.user.email,
-        role: UserRoles.ADMIN,
+        role: payload.user.role,
       }
     })
     builder.addCase(sigOut.fulfilled, (state) => {

@@ -2,6 +2,7 @@ import { Typography } from '@mui/material'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Route, Routes } from 'react-router-dom'
+import Order from '../components/order/Order'
 
 import AdminLayout from '../layout/AdminLayout'
 import UserLayout from '../layout/UserLayout'
@@ -40,6 +41,18 @@ const AppRoutes = () => {
             />
           }
         />
+
+        <Route
+          path="order"
+          element={
+            <ProtectedRoute
+              isAllowed={isAllowed([UserRoles.USER])}
+              fallBackPath={role === UserRoles.ADMIN ? '/admin/meals' : '/'}
+              component={Order}
+            />
+          }
+        />
+
         <Route
           path="signup"
           element={
@@ -50,6 +63,7 @@ const AppRoutes = () => {
             />
           }
         />
+
         <Route
           path="signin"
           element={
@@ -61,6 +75,7 @@ const AppRoutes = () => {
           }
         />
       </Route>
+
       <Route
         path="/admin"
         element={

@@ -34,7 +34,7 @@ export const Basket = ({ onClose, open }) => {
 
   const orderSubmitHandler = async () => {
     try {
-      await dispatch(submitOrder({ orderData: { items } })).unwrap()
+      await dispatch(submitOrder({ totalPrice: getTotalPrice() })).unwrap()
       dispatch(
         uiActions.showSnackBar({
           severity: 'success',

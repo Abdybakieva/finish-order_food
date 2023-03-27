@@ -9,9 +9,10 @@ import {
 
 export const getBasket = createAsyncThunk(
   'basket/getBasket',
-  async (payload, { rejectWithValue }) => {
+  async (payload, { rejectWithValue, getState }) => {
     try {
-      const { data } = await getBasketRequest()
+      const { token } = getState().auth
+      const { data } = await getBasketRequest(token)
 
       return data.data.items
     } catch (error) {
@@ -22,9 +23,10 @@ export const getBasket = createAsyncThunk(
 
 export const addtoBasket = createAsyncThunk(
   'basket/addToBasket',
-  async (newItem, { dispatch, rejectWithValue }) => {
+  async (newItem, { dispatch, rejectWithValue, getState }) => {
     try {
-      await postBasketRequest(newItem)
+      const { token } = getState().auth
+      await postBasketRequest(newItem, token)
       // await fetchApi(`foods/${newItem.id}/addToBasket`, {
       //   method: 'POST',
       //   body: { amount: newItem.amount },
@@ -39,9 +41,10 @@ export const addtoBasket = createAsyncThunk(
 
 export const updeteBasketItem = createAsyncThunk(
   'basket/updeteBasket',
-  async ({ amount, id }, { dispatch, rejectWithValue }) => {
+  async ({ amount, id }, { dispatch, rejectWithValue, getState }) => {
     try {
-      await putBasketRequest(amount, id)
+      const { token } = getState().auth
+      await putBasketRequest(amount, id, token)
       // await fetchApi(`basketItem/${id}/update`, {
       //   method: 'PUT',
       //   body: { amount },
@@ -55,9 +58,10 @@ export const updeteBasketItem = createAsyncThunk(
 
 export const deleteBasketItem = createAsyncThunk(
   'basket/deleteBasket',
-  async (id, { dispatch, rejectWithValue }) => {
+  async (id, { dispatch, rejectWithValue, getState }) => {
     try {
-      await deleteBasketRequest(id)
+      const { token } = getState().auth
+      await deleteBasketRequest(id, token)
       // await fetchApi(`basketItem/${id}/delete`, {
       //   method: 'DELETE',
       // })
@@ -70,9 +74,10 @@ export const deleteBasketItem = createAsyncThunk(
 
 export const submitOrder = createAsyncThunk(
   'basket/submitOrder',
-  async ({ orderData }, { dispatch, rejectWithValue }) => {
+  async (totalPrice, { dispatch, rejectWithValue, getState }) => {
     try {
-      await postSubmitOrder(orderData)
+      const { token } = getState().auth
+      await postSubmitOrder(totalPrice, token)
       // await fetch(`https://jsonplaceholder.typicode.com/posts`, {
       //   method: 'POST',
       //   body: orderData,

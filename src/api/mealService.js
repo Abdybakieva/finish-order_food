@@ -4,29 +4,42 @@ export const getMealRequest = () => {
   return axiosInstance.get('/foods')
 }
 
-export const getBasketRequest = () => {
-  return axiosInstance.get('/basket')
-}
-
-export const postBasketRequest = (newItem) => {
-  return axiosInstance.post(`foods/${newItem.id}/addToBasket`, {
-    amount: newItem.amount,
+export const getBasketRequest = (token) => {
+  return axiosInstance.get('/basket', {
+    headers: { Authorization: token },
   })
 }
 
-export const putBasketRequest = (mealAmount, id) => {
-  return axiosInstance.put(`basketItem/${id}/update`, { amount: mealAmount })
-}
-
-export const deleteBasketRequest = (id) => {
-  return axiosInstance.delete(`basketItem/${id}/delete`)
-}
-
-export const postSubmitOrder = (orderData) => {
+export const postBasketRequest = (newItem, token) => {
   return axiosInstance.post(
-    `https://jsonplaceholder.typicode.com/posts`,
-    orderData
+    `foods/${newItem.id}/addToBasket`,
+    {
+      amount: newItem.amount,
+    },
+    {
+      headers: { Authorization: token },
+    }
   )
+}
+
+export const putBasketRequest = (mealAmount, id, token) => {
+  return axiosInstance.put(
+    `basketItem/${id}/update`,
+    { amount: mealAmount },
+    { headers: { Authorization: token } }
+  )
+}
+
+export const deleteBasketRequest = (id, token) => {
+  return axiosInstance.delete(`basketItem/${id}/delete`, {
+    headers: { Authorization: token },
+  })
+}
+
+export const postSubmitOrder = (orderData, token) => {
+  return axiosInstance.post(`/orders`, orderData, {
+    headers: { Authorization: token },
+  })
 }
 
 export const postMealsRequest = (addMeals, token) => {

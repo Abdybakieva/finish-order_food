@@ -8,9 +8,10 @@ import { sigOut } from '../../store/auth/auth.thunk'
 import { getBasket } from '../../store/basket/basket.thunk'
 
 import { uiActions } from '../../store/UI/ui.slice'
+import { withAuthModal } from '../hoc/withAuthModal'
 import { BasketButton } from './BasketButton'
 
-export const Header = ({ onShowBasket }) => {
+const Header = ({ onShowBasket, showAuthModal }) => {
   const isAuthorized = useSelector((state) => state.auth.isAuthorized)
   const items = useSelector((state) => state.basket.items)
   const themeMode = useSelector((state) => state.ui.themeMode)
@@ -48,6 +49,13 @@ export const Header = ({ onShowBasket }) => {
     }
   }, [])
 
+  const showBasketHandler = () => {
+    if (!isAuthorized) {
+      return showAuthModal()
+    }
+    return onShowBasket()
+  }
+
   return (
     <Container>
       <Link to="/">
@@ -55,7 +63,7 @@ export const Header = ({ onShowBasket }) => {
       </Link>
 
       <BasketButton
-        onClick={onShowBasket}
+        onClick={showBasketHandler}
         className={animationClass}
         count={calculateTotalAmount()}
       />
@@ -64,16 +72,21 @@ export const Header = ({ onShowBasket }) => {
       </Button>
 
       {isAuthorized ? (
-        <Button onClick={signOutHandler}>Sign Out</Button>
+        <Button style={{ color: '#fff' }} onClick={signOutHandler}>
+          Sign Out
+        </Button>
       ) : (
         <Button style={{ color: '#fff' }} onClick={() => navigate('/signin')}>
           Sign In
         </Button>
       )}
+      <Button style={{ color: '#fff' }} onClick={() => navigate('/order')}>
+        My Orders
+      </Button>
     </Container>
   )
 }
-
+export default withAuthModal(Header)
 const Container = styled(AppBar)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'row',

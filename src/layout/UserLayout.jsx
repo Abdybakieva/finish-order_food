@@ -2,7 +2,7 @@ import { Outlet } from 'react-router-dom'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Basket } from '../components/basket/Basket'
-import { Header } from '../components/header/Header'
+import Header from '../components/header/Header'
 
 const UserLayout = () => {
   const [isBasketVisible, setBasketVisible] = useState(false)
